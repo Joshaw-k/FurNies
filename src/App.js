@@ -14,25 +14,32 @@ import {
 } from './pages'
 function App() {
   return (
-    <AuthWrapper>
+    <AuthWrapper
+      domain={process.env.REACT_APP_AUTH_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+      cacheLocation="localstorage"
+    >
       <Router>
         <Navbar />
         <Sidebar />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='about' element={<About />} />
-          <Route path='cart' element={<Cart />} />
-          <Route path='products' element={<Products />} />
-          <Route path='products/:id' element={<SingleProduct />} />
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<SingleProduct />} />
           <Route
-            path='checkout'
+            path="checkout"
             element={
               <PrivateRoute>
                 <Checkout />
               </PrivateRoute>
             }
           />
-          <Route path='error' element={<Error />} />
+          <Route path="error" element={<Error />} />
         </Routes>
         <Footer />
       </Router>
